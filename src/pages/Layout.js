@@ -4,6 +4,7 @@ const Layout = () => {
 	return (
 		<div>
 			{/* 임시 gnb메뉴 */}
+			<h1>항해 쇼핑몰</h1>
 			<nav>
 				<ul>
 					<li>

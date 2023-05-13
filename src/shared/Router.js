@@ -1,16 +1,13 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../pages/Layout";
-import Cart from "../pages/goods/Cart";
-import Detail from "../pages/goods/Detail";
-import Join from "../pages/member/Join";
-import Login from "../pages/member/Login";
-import AddGoods from "../pages/seller/AddGoods";
-import MyGoods from "../pages/seller/MyGoods";
-import GoodsList from "../pages/goods/GoodsList";
+import { Cart, Detail, GoodsList } from "../pages/goods";
+import { Join, Login } from "../pages/member";
+import { AddGoods, MyGoods } from "../pages/seller";
 
 const Router = () => {
 	return (
+		// url 라우터 처리
 		<BrowserRouter>
 			<Routes>
 				{/* 공통영역(상단 gnb메뉴)을 위한 Layout  */}
