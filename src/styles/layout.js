@@ -14,10 +14,14 @@ export const Header = styled.header`
 	}
 	.inner {
 		position: relative;
-		width: 1000px;
+
 		margin: 0 auto;
 		display: flex;
 		justify-content: center;
+		//media query 스타일이 500px미만일때 적용되게 됩니다.
+		@media screen and (min-width: 700px) {
+			width: 1000px;
+		}
 	}
 	.util {
 		position: absolute;
@@ -33,7 +37,7 @@ export const Header = styled.header`
 `;
 
 export const Content = styled.div`
-	width: 1000px;
+	max-width: 1000px;
 	margin: 0 auto;
 	padding-bottom: 100px;
 `;

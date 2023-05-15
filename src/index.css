@@ -133,20 +133,35 @@ a {
 }
 .mainVisual {
 	position: relative;
-	height: 560px;
+	height: 230px;
 }
 .mySwiper {
-	height: 560px;
+	height: 100%;
 }
 .mySwiper .swiper-slide {
 	position: relative;
-	height: 560px;
+	height: 100%;
 	overflow: hidden;
 }
 
 .cover_img {
 	position: absolute;
+	width: auto;
+	height: 100%;
 	top: 0;
 	left: 50%;
 	transform: translateX(-50%);
+}
+
+@media screen and (min-width: 700px) {
+	.mainVisual {
+		height: 560px;
+	}
+	.mySwiper,
+	.swiper-slide {
+		height: 100%;
+	}
+	.cover_img {
+		height: auto;
+	}
 }
