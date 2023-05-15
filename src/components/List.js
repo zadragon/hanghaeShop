@@ -22,6 +22,7 @@ export default function ActionAreaCard() {
                                     <Typography variant="body2" color="text.secondary">
                                         <div>{item.price}</div>
                                         {item.desc}
+                                        <button>장바구니담기</button>
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
