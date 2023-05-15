@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 const Detail = () => {
-	return <div>상품상세</div>;
+    return <div>상품상세</div>;
 };
 
 export default Detail;
