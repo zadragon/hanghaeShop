@@ -1,7 +1,12 @@
-import React from "react";
+import React from 'react';
+import * as S from '../../styles/layout';
 
 const Cart = () => {
-	return <div>장바구니</div>;
+    return (
+        <S.Content>
+            <h2>장바구니</h2>
+        </S.Content>
+    );
 };
 
 export default Cart;

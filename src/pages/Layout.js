@@ -2,8 +2,8 @@ import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import Button from '@mui/material/Button';
-import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import * as S from '../styles/layout';
+import { Fingerprint } from '@mui/icons-material';
 
 const Layout = () => {
     return (
@@ -12,7 +12,7 @@ const Layout = () => {
                 <div className="inner">
                     <h1>
                         <Link to="/">
-                            <LocalOfferIcon style={{ color: '#be2edd', fontSize: '34px', verticalAlign: 'middle' }} />{' '}
+                            <LocalOfferIcon style={{ color: '#3498db', fontSize: '34px', verticalAlign: 'middle' }} />{' '}
                             항해 쇼핑몰
                         </Link>
                     </h1>
@@ -26,9 +26,16 @@ const Layout = () => {
                                 <Link to="/goods/cart">장바구니</Link>
                             </li>
                             <li>
-                                <Button variant="contained" startIcon={<VpnKeyIcon />} color="primary" size="small">
-                                    로그인
-                                </Button>
+                                <Link to="/member/login">
+                                    <Button
+                                        variant="contained"
+                                        startIcon={<Fingerprint />}
+                                        color="primary"
+                                        size="small"
+                                    >
+                                        로그인
+                                    </Button>
+                                </Link>
                             </li>
                         </ul>
                     </div>
