@@ -1,7 +1,8 @@
-import React from "react";
+import React from 'react';
+import * as S from '../../styles/layout';
 
 const AddGoods = () => {
-	return <div>상품 업로드</div>;
+    return <S.Content>상품 업로드</S.Content>;
 };
 
 export default AddGoods;

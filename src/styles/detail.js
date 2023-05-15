@@ -31,6 +31,12 @@ export const GoodsTitle = styled.div`
                 cursor: pointer !important;
             }
         }
+        .totalPrice {
+            .big {
+                font-size: 30px;
+                font-weight: bold;
+            }
+        }
         .buttonAction {
             margin-top: 20px;
             display: flex;

@@ -29,6 +29,9 @@ const Detail = () => {
                             </IconButton>
                         </div>
                     </div>
+                    <div className="totalPrice">
+                        <strong>총 상품금액 : </strong> <span className="big">1,000,000</span>원
+                    </div>
                     <div className="buttonAction">
                         <Button variant="contained" size="large">
                             🧺 장바구니 담기
