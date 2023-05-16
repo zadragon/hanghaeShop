@@ -30,3 +30,63 @@ export const Member = styled.div`
         }
     }
 `;
+
+export const CartArea = styled.div`
+    h2 {
+        font-size: 36px;
+
+        padding: 20px 0 15px;
+        border-bottom: 1px solid #ddd;
+    }
+`;
+export const CartList = styled.div`
+    display: flex;
+    justify-content: space-between;
+    ul {
+        width: ${props => props.widthSize || '75%'};
+        li {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+            .imgArea {
+                overflow: hidden;
+                width: 200px;
+                height: 200px;
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+            .txtArea {
+                width: 250px;
+                strong {
+                    font-size: 20px;
+                }
+            }
+            .amountArea {
+                width: 100px;
+                text-align: center;
+                .totalPrice {
+                    font-size: 17px;
+                }
+            }
+        }
+    }
+    .totalArea {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 20%;
+        height: 173px;
+        margin-top: 15px;
+        border: 1px solid #ddd;
+        padding: 15px;
+        text-align: center;
+        table {
+            width: 100%;
+        }
+    }
+`;
