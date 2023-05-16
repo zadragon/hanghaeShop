@@ -45,7 +45,7 @@ const Detail = () => {
             <D.GoodsDetail>
                 <img src="https://img-cf.kurly.com/shop/data/goodsview/20180717/gv10000027390_1.jpg" />
                 <img src="https://img-cf.kurly.com/shop/data/goodsview/20190314/gv40000044786_1.jpg" />
-                <img src="https://img-cf.kurly.com/shop/data/goodsview/20210503/gv30000179567_1.jpg" />{' '}
+                <img src="https://img-cf.kurly.com/shop/data/goodsview/20210503/gv30000179567_1.jpg" />
                 <img src="https://img-cf.kurly.com/shop/data/goodsview/20220913/gv30000179567_3.jpg" />
                 <p className="words">
                     크림치즈처럼 단단하고 크리미한 질감이 단연 돋보입니다. 꾸덕꾸덕한 제형에 풍부한 맛과 영양을 담고

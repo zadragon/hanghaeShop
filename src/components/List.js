@@ -13,23 +13,25 @@ export default function ActionAreaCard() {
             <ProducList>
                 {itemlist.map((item, idx) => (
                     <li key={idx}>
-                        <Link to="/goods/detail/1">
-                            <Card sx={{ width: '100%' }}>
-                                <CardActionArea>
+                        <Card sx={{ width: '100%' }}>
+                            <CardActionArea component="div">
+                                <Link to="/goods/detail/1">
                                     <CardMedia component="img" height="140" image={item.imgUrl} alt="green iguana" />
-                                    <CardContent>
+                                </Link>
+                                <CardContent>
+                                    <Link to="/goods/detail/1">
                                         <Typography gutterBottom variant="h5" component="div">
                                             {item.productName}
                                         </Typography>
-                                        <Typography variant="body2" color="text.secondary">
+                                        <Typography variant="body2" color="text.secondary" component="div">
                                             <div>{item.price}</div>
                                             {item.desc}
-                                            <button>장바구니담기</button>
                                         </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Link>
+                                    </Link>
+                                    <button>장바구니 담기</button>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
                     </li>
                 ))}
             </ProducList>

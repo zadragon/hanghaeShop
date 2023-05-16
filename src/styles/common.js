@@ -43,7 +43,7 @@ export const CartList = styled.div`
     display: flex;
     justify-content: space-between;
     ul {
-        width: ${props => props.widthSize || '75%'};
+        width: ${props => props.widthsize || '75%'};
         li {
             display: flex;
             gap: 10px;

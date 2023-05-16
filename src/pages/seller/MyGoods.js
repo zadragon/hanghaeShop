@@ -8,7 +8,7 @@ const MyGoods = () => {
         <S.Content>
             <D.CartArea>
                 <h2>내가 등록한상품</h2>
-                <D.CartList widthSize="100%">
+                <D.CartList widthsize="100%">
                     <ul>
                         <li>
                             <div className="imgArea">
