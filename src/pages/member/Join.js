@@ -2,6 +2,9 @@ import React from 'react';
 import { Button, TextField } from '@mui/material';
 import * as S from '../../styles/common.js';
 import { Link } from 'react-router-dom';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 const Join = () => {
     return (
@@ -40,6 +43,9 @@ const Join = () => {
                     fullWidth
                 />
             </div>
+            <FormGroup>
+                <FormControlLabel control={<Checkbox />} label="판매자 회원가입일 경우 체크해주세요." />
+            </FormGroup>
             <div className="row">
                 <Button variant="contained" size="large">
                     회원가입
