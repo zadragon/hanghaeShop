@@ -6,10 +6,12 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay } from 'swiper';
 import TitlebarImageList from '../../components/List.js';
+import MetaTag from '../../components/MetaTag';
 
 const GoodsList = () => {
     return (
         <>
+            <MetaTag title="메인 :: 항해 쇼핑몰" description="이것저것 팝니다." keywords="자영업, 돈벌자, 매니" />
             <div className="mainVisual">
                 <Swiper
                     autoplay={{
