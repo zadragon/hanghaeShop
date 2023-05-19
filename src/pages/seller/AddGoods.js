@@ -27,6 +27,7 @@ const AddGoods = () => {
                             size="small"
                             variant="standard"
                             fullWidth
+                            type="number"
                         />
                     </div>
                     <div className="row">
@@ -37,6 +38,7 @@ const AddGoods = () => {
                             size="small"
                             variant="standard"
                             fullWidth
+                            type="number"
                         />
                     </div>
                     <div className="row">
@@ -66,6 +68,8 @@ const AddGoods = () => {
                             placeholder=""
                             size="small"
                             variant="standard"
+                            multiline
+                            rows={4}
                             fullWidth
                         />
                     </div>
