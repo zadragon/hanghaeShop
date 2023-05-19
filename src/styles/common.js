@@ -1,5 +1,24 @@
 import styled from 'styled-components';
 
+export const AddGoodsArea = styled.div`
+    width: 500px;
+    margin: 40px auto 0;
+    padding: 20px 30px 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    box-shadow: 10px 10px 10px #ddd;
+    h2 {
+        font-size: 36px;
+        font-weight: bold;
+    }
+    .row {
+        margin-top: 20px;
+    }
+    .btnSubmit {
+        margin-top: 20px;
+    }
+`;
 export const Member = styled.div`
     position: relative;
     display: block;
