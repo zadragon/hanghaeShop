@@ -4,6 +4,7 @@ import Layout from '../pages/Layout';
 import { Cart, Detail, GoodsList } from '../pages/goods';
 import { Join, Login } from '../pages/member';
 import { AddGoods, MyGoods } from '../pages/seller';
+import JoinDone from '../pages/member/JoinDone';
 
 const Router = () => {
     return (
@@ -20,6 +21,7 @@ const Router = () => {
                     {/* 회원관련 */}
                     <Route path="/member/login" element={<Login />} />
                     <Route path="/member/join" element={<Join />} />
+                    <Route path="/member/joinDone" element={<JoinDone />} />
 
                     {/* 판매자관련 */}
                     <Route path="/seller/addGoods" element={<AddGoods />} />

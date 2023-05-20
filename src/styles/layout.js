@@ -23,6 +23,14 @@ export const Header = styled.header`
             width: 1000px;
         }
     }
+    .userInfo {
+        position: absolute;
+        left: 0;
+        top: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
     .util {
         position: absolute;
         top: 10px;

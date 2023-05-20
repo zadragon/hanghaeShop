@@ -4,12 +4,27 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import Button from '@mui/material/Button';
 import * as S from '../styles/layout';
 import { Fingerprint } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie';
 
 const Layout = () => {
+    const [cookies, setCookie, removeCookie] = useCookies(); //eslint-disable-line no-unused-vars
+    const userInfo = useSelector(state => state.userInfo);
+
+    const onLogout = () => {
+        removeCookie('token');
+    };
+    const user = useSelector(state => state.userInfo);
+
     return (
         <div id="container">
             <S.Header>
                 <div className="inner">
+                    {cookies.token && (
+                        <div className="userInfo">
+                            <strong>{user.userName}</strong>님 환영합니다.
+                        </div>
+                    )}
                     <h1>
                         <Link to="/">
                             <LocalOfferIcon style={{ color: '#3498db', fontSize: '34px', verticalAlign: 'middle' }} />{' '}
@@ -19,23 +34,37 @@ const Layout = () => {
                     {/* 임시 gnb메뉴 */}
                     <div className="util">
                         <ul>
-                            <li>
-                                <Link to="/seller/addGoods">상품등록</Link>
-                            </li>
+                            {userInfo.userType == 'seller' && (
+                                <li>
+                                    <Link to="/seller/addGoods">상품등록</Link>
+                                </li>
+                            )}
                             <li>
                                 <Link to="/goods/cart">장바구니</Link>
                             </li>
                             <li>
-                                <Link to="/member/login">
+                                {cookies.token ? (
                                     <Button
                                         variant="contained"
                                         startIcon={<Fingerprint />}
                                         color="primary"
                                         size="small"
+                                        onClick={onLogout}
                                     >
-                                        로그인
+                                        로그아웃
                                     </Button>
-                                </Link>
+                                ) : (
+                                    <Link to="/member/login">
+                                        <Button
+                                            variant="contained"
+                                            startIcon={<Fingerprint />}
+                                            color="primary"
+                                            size="small"
+                                        >
+                                            로그인
+                                        </Button>
+                                    </Link>
+                                )}
                             </li>
                         </ul>
                     </div>

@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay } from 'swiper';
-import TitlebarImageList from '../../components/List.js';
+import TitlebarImageList from '../../components/goods/List.js';
 import MetaTag from '../../components/MetaTag';
 
 const GoodsList = () => {
