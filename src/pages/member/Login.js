@@ -15,7 +15,7 @@ const Login = () => {
     });
 
     const navigate = useNavigate();
-    const [cookies = null, setCookies] = useCookies();
+    const [cookies, setCookies] = useCookies();
     const dispatch = useDispatch();
 
     useEffect(() => {}, [cookies]);

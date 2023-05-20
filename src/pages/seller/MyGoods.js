@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as S from '../../styles/layout';
 import * as D from '../../styles/common';
 import { Button } from '@mui/material';
 import MetaTag from '../../components/MetaTag';
+import { goods } from '../../api/api';
+import { useCookies } from 'react-cookie';
 
 const MyGoods = () => {
+    const [cookies] = useCookies();
+    useEffect(() => {
+        goods.getMyGoods(cookies.token);
+    }, []);
+
     return (
         <>
             <MetaTag
