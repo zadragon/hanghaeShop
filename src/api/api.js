@@ -67,6 +67,34 @@ export const goods = {
             }
         });
     },
+    addCart: (payload, navigate) => {
+        axios
+            .post(`${process.env.REACT_APP_HOST}/api/buyer/${payload.productId}/cart`, payload)
+            .then(response => {
+                if (response.status === 200) {
+                    alert(response.data.message);
+                    navigate('/goods/cart');
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                alert(error.reponse.date.errorMessage);
+            });
+    },
+    viewCart: token => {
+        axios
+            .post(`${process.env.REACT_APP_HOST}/api/buyer/cart`, token)
+            .then(response => {
+                if (response.status === 200) {
+                    console.log(response);
+                    //alert(response.data.message);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                alert(error.reponse.date.errorMessage);
+            });
+    },
     addGoods: (payload, navigate) => {
         console.log(payload);
         axios

@@ -7,12 +7,15 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import MetaTag from '../../components/MetaTag';
 import { useCookies } from 'react-cookie';
 import { goods } from '../../api/api';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 const Detail = () => {
     //const navigate = useNavigate();
     const param = useParams();
     const [cookie] = useCookies();
     const [state, setState] = useState({ productName: '', productLink: '', productPrice: 0 });
+    let [amount, setAmount] = useState(1);
+    //let [total, setTotal] = useState(0);
+    const navigate = useNavigate();
     console.log(param.id);
     console.log(state);
 
@@ -20,6 +23,24 @@ const Detail = () => {
 
     //const dispatch = useDispatch();
     //const goodsList = useSelector(state => state.buyerInfo.allgoods);
+
+    const ctlAmount = type => {
+        if (type == 'add') {
+            setAmount(++amount);
+        } else if (type == 'minus') {
+            amount <= 1 ? setAmount(1) : setAmount(--amount);
+        }
+    };
+
+    const addCartui = () => {
+        const payload = {
+            token: cookie.token,
+            productId: param.id,
+            productAmount: amount,
+            productLink: productLink,
+        };
+        goods.addCart(payload, navigate);
+    };
 
     useEffect(() => {
         goods.getBuyerGoodsDetail(cookie.token, param.id, setState);
@@ -42,11 +63,11 @@ const Detail = () => {
                         <div className="amountSetting">
                             <strong>갯수선택</strong>
                             <div>
-                                <IconButton color="primary">
+                                <IconButton color="primary" onClick={() => ctlAmount('minus')}>
                                     <RemoveCircleOutlineIcon />
                                 </IconButton>
-                                <span>1</span>
-                                <IconButton color="primary">
+                                <span>{amount}</span>
+                                <IconButton color="primary" onClick={() => ctlAmount('add')}>
                                     <ControlPointIcon />
                                 </IconButton>
                             </div>
@@ -55,7 +76,7 @@ const Detail = () => {
                             <strong>총 상품금액 : </strong> <span className="big">1,000,000</span>원
                         </div>
                         <div className="buttonAction">
-                            <Button variant="contained" size="large">
+                            <Button variant="contained" size="large" onClick={addCartui}>
                                 🧺 장바구니 담기
                             </Button>
                             <Button variant="contained" size="large" onClick={() => alert('구매되었습니다.')}>

@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as S from '../../styles/layout';
 import * as D from '../../styles/common';
 import { Button, IconButton } from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import MetaTag from '../../components/MetaTag';
+import { goods } from '../../api/api';
+import { useCookies } from 'react-cookie';
 
 const Cart = () => {
+    const cookie = useCookies();
+    console.log(cookie.token);
+    useEffect(() => {
+        goods.viewCart(cookie.token);
+    }, []);
+
     return (
         <>
             <MetaTag title="장바구니 :: 항해 쇼핑몰" description="이것저것 팝니다." keywords="자영업, 돈벌자, 매니" />
@@ -81,10 +89,12 @@ const Cart = () => {
                         <div className="totalArea">
                             <strong>전체상품 : 2개</strong>
                             <table>
-                                <tr>
-                                    <th scope="row">주문금액</th>
-                                    <td>1,000,000원</td>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">주문금액</th>
+                                        <td>1,000,000원</td>
+                                    </tr>
+                                </tbody>
                             </table>
                             <Button variant="contained" size="large">
                                 💳 주문하기
