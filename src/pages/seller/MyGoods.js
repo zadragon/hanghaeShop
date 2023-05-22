@@ -5,11 +5,17 @@ import { Button } from '@mui/material';
 import MetaTag from '../../components/MetaTag';
 import { goods } from '../../api/api';
 import { useCookies } from 'react-cookie';
+import { useDispatch, useSelector } from 'react-redux';
 
 const MyGoods = () => {
     const [cookies] = useCookies();
+
+    const dispatch = useDispatch();
+    const myList = useSelector(state => state.sellerInfo.sellerGoods);
+    console.log(myList);
+
     useEffect(() => {
-        goods.getMyGoods(cookies.token);
+        goods.getMyGoods(cookies.token, dispatch);
     }, []);
 
     return (
@@ -24,56 +30,35 @@ const MyGoods = () => {
                     <h2>내가 등록한상품</h2>
                     <D.CartList widthsize="100%">
                         <ul>
-                            <li>
-                                <div className="imgArea">
-                                    <img src="https://img-cf.kurly.com/shop/data/goods/1580711722169l0.jpg" alt="" />
-                                </div>
-                                <div className="txtArea">
-                                    <strong>상품명</strong>
-                                    <div className="desc">
-                                        📢 한정수량 진행! 옵션2번 주목! 28,000원 → 19,000원 32% OFF
-                                    </div>
-                                </div>
-                                <div className="amountArea">
-                                    <p className="totalPrice">1,000,000원</p>
-                                    <div className="amountSetting">
-                                        <strong>재고량</strong>
-                                        <div>
-                                            <span>1</span>
+                            {myList.map((item, idx) => {
+                                return (
+                                    <li key={idx}>
+                                        <div className="imgArea">
+                                            <img src={item.productLink} alt="" />
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="btnArea">
-                                    <Button variant="contained" size="large">
-                                        🗑️ 삭제하기
-                                    </Button>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="imgArea">
-                                    <img src="https://img-cf.kurly.com/shop/data/goods/1580711722169l0.jpg" alt="" />
-                                </div>
-                                <div className="txtArea">
-                                    <strong>상품명</strong>
-                                    <div className="desc">
-                                        📢 한정수량 진행! 옵션2번 주목! 28,000원 → 19,000원 32% OFF
-                                    </div>
-                                </div>
-                                <div className="amountArea">
-                                    <p className="totalPrice">1,000,000원</p>
-                                    <div className="amountSetting">
-                                        <strong>재고량</strong>
-                                        <div>
-                                            <span>1</span>
+                                        <div className="txtArea">
+                                            <strong>{item.productName}</strong>
+                                            <div className="desc">
+                                                📢 한정수량 진행! 옵션2번 주목! 28,000원 → 19,000원 32% OFF
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="btnArea">
-                                    <Button variant="contained" size="large">
-                                        🗑️ 삭제하기
-                                    </Button>
-                                </div>
-                            </li>
+                                        <div className="amountArea">
+                                            <p className="totalPrice">{item.productPrice}</p>
+                                            <div className="amountSetting">
+                                                <strong>재고량</strong>
+                                                <div>
+                                                    <span>{item.productAmount}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="btnArea">
+                                            <Button variant="contained" size="large">
+                                                🗑️ 삭제하기
+                                            </Button>
+                                        </div>
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </D.CartList>
                 </D.CartArea>

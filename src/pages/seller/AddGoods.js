@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import * as S from '../../styles/layout';
 import * as D from '../../styles/common';
+import { useNavigate } from 'react-router-dom';
 import { Button, TextField } from '@mui/material';
 import { useCookies } from 'react-cookie';
 import { goods } from '../../api/api';
 
 const AddGoods = () => {
     const [cookies] = useCookies(); //eslint-disable-line no-unused-vars
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         token: '',
         productName: '',
         productAmount: 0,
         productLink: '',
+        productPrice: 0,
     });
     const onChangeHandler = e => {
-        const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
+        let { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
+        console.log(typeof value);
+        name == 'productAmount' || name == 'productPrice' ? (value = +value) : value;
         setInputs({
             ...inputs, // 기존의 input 객체를 복사한 뒤
             [name]: value, // name 키를 가진 값을 value 로 설정
@@ -25,12 +30,13 @@ const AddGoods = () => {
     const onSubmit = e => {
         e.preventDefault(); // 버튼 기본동작 막음
         const payload = { ...inputs, token: cookies.token };
-        goods.addGoods(payload);
+        goods.addGoods(payload, navigate);
         setInputs({
             token: '',
             productName: '',
             productAmount: 0,
             productLink: '',
+            productPrice: 0,
         });
     };
 
@@ -53,20 +59,20 @@ const AddGoods = () => {
                                 onChange={onChangeHandler}
                             />
                         </div>
-                        {/* <div className="row">
-                        <TextField
-                            label="가격"
-                            id="standard-size-small"
-                            placeholder=""
-                            size="small"
-                            variant="standard"
-                            fullWidth
-                            name="productPrice"
-                            type="number"
-                            value={inputs.productPrice}
-                            onChange={onChangeHandler}
-                        />
-                    </div> */}
+                        <div className="row">
+                            <TextField
+                                label="가격"
+                                id="standard-size-small"
+                                placeholder=""
+                                size="small"
+                                variant="standard"
+                                fullWidth
+                                name="productPrice"
+                                type="number"
+                                value={inputs.productPrice}
+                                onChange={onChangeHandler}
+                            />
+                        </div>
                         <div className="row">
                             <TextField
                                 label="수량"

@@ -7,16 +7,22 @@ import { CardActionArea } from '@mui/material';
 import { styled } from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export default function ActionAreaCard() {
+export default function ActionAreaCard(goodsList) {
+    console.log(goodsList.goodsList);
     return (
         <>
             <ProducList>
-                {itemlist.map((item, idx) => (
-                    <li key={idx}>
+                {goodsList.goodsList.map(item => (
+                    <li key={item.productsId}>
                         <Card sx={{ width: '100%' }}>
                             <CardActionArea component="div">
-                                <Link to="/goods/detail/1">
-                                    <CardMedia component="img" height="140" image={item.imgUrl} alt="green iguana" />
+                                <Link to={`/goods/detail/${item.productsId}`}>
+                                    <CardMedia
+                                        component="img"
+                                        height="140"
+                                        image={item.productLink}
+                                        alt="green iguana"
+                                    />
                                 </Link>
                                 <CardContent>
                                     <Link to="/goods/detail/1">
@@ -24,8 +30,8 @@ export default function ActionAreaCard() {
                                             {item.productName}
                                         </Typography>
                                         <Typography variant="body2" color="text.secondary" component="div">
-                                            <div>{item.price}</div>
-                                            {item.desc}
+                                            <div>{item.productPrice} 원</div>
+                                            {/* {item.desc} */}
                                         </Typography>
                                     </Link>
                                     <button>장바구니 담기</button>
@@ -53,36 +59,3 @@ const ProducList = styled.ul`
         }
     }
 `;
-
-const itemlist = [
-    {
-        productName: '상품명',
-        price: '100,000원',
-        imgUrl: 'https://mui.com/static/images/cards/contemplative-reptile.jpg',
-        desc: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents Antarctica',
-    },
-    {
-        productName: '상품명',
-        price: '100,000원',
-        imgUrl: 'https://mui.com/static/images/cards/contemplative-reptile.jpg',
-        desc: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents Antarctica',
-    },
-    {
-        productName: '상품명',
-        price: '100,000원',
-        imgUrl: 'https://mui.com/static/images/cards/contemplative-reptile.jpg',
-        desc: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents Antarctica',
-    },
-    {
-        productName: '상품명',
-        price: '100,000원',
-        imgUrl: 'https://mui.com/static/images/cards/contemplative-reptile.jpg',
-        desc: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents Antarctica',
-    },
-    {
-        productName: '상품명',
-        price: '100,000원',
-        imgUrl: 'https://mui.com/static/images/cards/contemplative-reptile.jpg',
-        desc: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents Antarctica',
-    },
-];

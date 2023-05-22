@@ -1,23 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from '../../styles/layout';
 import * as D from '../../styles/detail';
 import { Button, IconButton } from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import MetaTag from '../../components/MetaTag';
+import { useCookies } from 'react-cookie';
+import { goods } from '../../api/api';
+import { useParams } from 'react-router-dom';
 const Detail = () => {
+    //const navigate = useNavigate();
+    const param = useParams();
+    const [cookie] = useCookies();
+    const [state, setState] = useState({ productName: '', productLink: '', productPrice: 0 });
+    console.log(param.id);
+    console.log(state);
+
+    const { productName, productLink, productPrice } = state;
+
+    //const dispatch = useDispatch();
+    //const goodsList = useSelector(state => state.buyerInfo.allgoods);
+
+    useEffect(() => {
+        goods.getBuyerGoodsDetail(cookie.token, param.id, setState);
+    }, []);
+
     return (
         <>
             <MetaTag title="상품상세 :: 항해 쇼핑몰" description="이것저것 팝니다." keywords="자영업, 돈벌자, 매니" />
             <S.Content>
                 <D.GoodsTitle>
                     <div className="imgArea">
-                        <img src="https://img-cf.kurly.com/shop/data/goods/1531797556744l0.jpg" alt="" />
+                        <img src={productLink} alt="" />
                     </div>
                     <div className="purchaseArea">
                         <div className="goodsInfo">
-                            <h2>상품명</h2>
-                            <div className="price">1,000,000원</div>
+                            <h2>{productName}</h2>
+                            <div className="price">{productPrice}</div>
                             <div className="desc">📢 한정수량 진행! 옵션2번 주목! 28,000원 → 19,000원 32% OFF</div>
                         </div>
                         <div className="amountSetting">
@@ -39,13 +58,13 @@ const Detail = () => {
                             <Button variant="contained" size="large">
                                 🧺 장바구니 담기
                             </Button>
-                            <Button variant="contained" size="large">
+                            <Button variant="contained" size="large" onClick={() => alert('구매되었습니다.')}>
                                 💰 구매하기
                             </Button>
                         </div>
                     </div>
                 </D.GoodsTitle>
-                <D.GoodsDetail>
+                <D.GoodsDetail style={{ display: 'none' }}>
                     <img src="https://img-cf.kurly.com/shop/data/goodsview/20180717/gv10000027390_1.jpg" />
                     <img src="https://img-cf.kurly.com/shop/data/goodsview/20190314/gv40000044786_1.jpg" />
                     <img src="https://img-cf.kurly.com/shop/data/goodsview/20210503/gv30000179567_1.jpg" />

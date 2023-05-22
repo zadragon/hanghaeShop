@@ -61,7 +61,7 @@ const Login = () => {
                     <div className="row">
                         <TextField
                             label="아이디"
-                            id="standard-size-small"
+                            id="userId"
                             placeholder="아이디를 입력해주세요."
                             size="small"
                             variant="standard"
@@ -75,7 +75,7 @@ const Login = () => {
                         <TextField
                             label="비밀번호"
                             type="password"
-                            id="standard-size-small"
+                            id="userPw"
                             placeholder="비밀번호를 입력해주세요."
                             size="small"
                             variant="standard"
