@@ -12,11 +12,15 @@ const MyGoods = () => {
 
     const dispatch = useDispatch();
     const myList = useSelector(state => state.sellerInfo.sellerGoods);
-    console.log(myList);
+    console.log(myList.length);
 
     useEffect(() => {
         goods.getMyGoods(cookies.token, dispatch);
     }, []);
+
+    const removeGoods = id => {
+        goods.removeGoods(cookies.token, id, dispatch);
+    };
 
     return (
         <>
@@ -30,7 +34,19 @@ const MyGoods = () => {
                     <h2>내가 등록한상품</h2>
                     <D.CartList widthsize="100%">
                         <ul>
-                            {myList.map((item, idx) => {
+                            {myList.length === 0 && (
+                                <p
+                                    style={{
+                                        fontSize: '30px',
+                                        padding: '100px 0',
+                                        margin: '0 auto',
+                                        textAlign: 'center',
+                                    }}
+                                >
+                                    등록된 상품이 없습니다.
+                                </p>
+                            )}
+                            {myList?.map((item, idx) => {
                                 return (
                                     <li key={idx}>
                                         <div className="imgArea">
@@ -52,7 +68,11 @@ const MyGoods = () => {
                                             </div>
                                         </div>
                                         <div className="btnArea">
-                                            <Button variant="contained" size="large">
+                                            <Button
+                                                variant="contained"
+                                                size="large"
+                                                onClick={() => removeGoods(item.productsId)}
+                                            >
                                                 🗑️ 삭제하기
                                             </Button>
                                         </div>

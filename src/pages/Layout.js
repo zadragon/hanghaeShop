@@ -1,18 +1,23 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import Button from '@mui/material/Button';
 import * as S from '../styles/layout';
 import { Fingerprint } from '@mui/icons-material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
+import { logout } from '../redux/modules/member';
 
 const Layout = () => {
-    const [cookies, setCookie, removeCookie] = useCookies(); //eslint-disable-line no-unused-vars
+    const [cookies, , removeCookie] = useCookies(); //eslint-disable-line no-unused-vars
     const userInfo = useSelector(state => state.userInfo);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const onLogout = () => {
-        removeCookie('token');
+        removeCookie('token', { path: '/' }, 1000);
+        dispatch(logout());
+        navigate('/member/login');
     };
     const user = useSelector(state => state.userInfo);
 

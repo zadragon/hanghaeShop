@@ -74,6 +74,8 @@ export const CartList = styled.div`
                 overflow: hidden;
                 width: 200px;
                 height: 200px;
+                display: flex;
+                align-items: center;
                 img {
                     width: 100%;
                     height: auto;
@@ -86,7 +88,7 @@ export const CartList = styled.div`
                 }
             }
             .amountArea {
-                width: 100px;
+                width: 120px;
                 text-align: center;
                 .totalPrice {
                     font-size: 17px;

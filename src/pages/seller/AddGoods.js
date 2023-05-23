@@ -68,7 +68,7 @@ const AddGoods = () => {
                                 variant="standard"
                                 fullWidth
                                 name="productPrice"
-                                type="number"
+                                type="text"
                                 value={inputs.productPrice}
                                 onChange={onChangeHandler}
                             />
@@ -82,7 +82,7 @@ const AddGoods = () => {
                                 variant="standard"
                                 fullWidth
                                 name="productAmount"
-                                type="number"
+                                type="text"
                                 value={inputs.productAmount}
                                 onChange={onChangeHandler}
                             />

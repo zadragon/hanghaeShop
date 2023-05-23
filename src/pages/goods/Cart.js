@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from '../../styles/layout';
 import * as D from '../../styles/common';
 import { Button, IconButton } from '@mui/material';
@@ -9,10 +9,11 @@ import { goods } from '../../api/api';
 import { useCookies } from 'react-cookie';
 
 const Cart = () => {
-    const cookie = useCookies();
-    console.log(cookie.token);
+    const [cookie] = useCookies();
+    const [cart, setCart] = useState([]);
+    console.log(cart);
     useEffect(() => {
-        goods.viewCart(cookie.token);
+        goods.viewCart(cookie.token, setCart);
     }, []);
 
     return (
@@ -23,68 +24,43 @@ const Cart = () => {
                     <h2>🧺 장바구니</h2>
                     <D.CartList>
                         <ul>
-                            <li>
-                                <div className="imgArea">
-                                    <img src="https://img-cf.kurly.com/shop/data/goods/1580711722169l0.jpg" alt="" />
-                                </div>
-                                <div className="txtArea">
-                                    <strong>상품명</strong>
-                                    <div className="desc">
-                                        📢 한정수량 진행! 옵션2번 주목! 28,000원 → 19,000원 32% OFF
-                                    </div>
-                                </div>
-                                <div className="amountArea">
-                                    <p className="totalPrice">1,000,000원</p>
-                                    <div className="amountSetting">
-                                        <strong>갯수선택</strong>
-                                        <div>
-                                            <IconButton color="primary">
-                                                <RemoveCircleOutlineIcon />
-                                            </IconButton>
-                                            <span>1</span>
-                                            <IconButton color="primary">
-                                                <ControlPointIcon />
-                                            </IconButton>
+                            {cart.map(item => {
+                                return (
+                                    <li key={item.productsId}>
+                                        <div className="imgArea">
+                                            <img src={item.Product.productLink} alt="" />
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="btnArea">
-                                    <Button variant="contained" size="large">
-                                        🗑️ 삭제하기
-                                    </Button>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="imgArea">
-                                    <img src="https://img-cf.kurly.com/shop/data/goods/1580711722169l0.jpg" alt="" />
-                                </div>
-                                <div className="txtArea">
-                                    <strong>상품명</strong>
-                                    <div className="desc">
-                                        📢 한정수량 진행! 옵션2번 주목! 28,000원 → 19,000원 32% OFF
-                                    </div>
-                                </div>
-                                <div className="amountArea">
-                                    <p className="totalPrice">1,000,000원</p>
-                                    <div className="amountSetting">
-                                        <strong>갯수선택</strong>
-                                        <div>
-                                            <IconButton color="primary">
-                                                <RemoveCircleOutlineIcon />
-                                            </IconButton>
-                                            <span>1</span>
-                                            <IconButton color="primary">
-                                                <ControlPointIcon />
-                                            </IconButton>
+                                        <div className="txtArea">
+                                            <strong>{item.Product.productName}</strong>
+                                            <div className="desc">
+                                                📢 한정수량 진행! 옵션2번 주목! 28,000원 → 19,000원 32% OFF
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="btnArea">
-                                    <Button variant="contained" size="large">
-                                        🗑️ 삭제하기
-                                    </Button>
-                                </div>
-                            </li>
+                                        <div className="amountArea">
+                                            <p className="totalPrice">
+                                                {item.Product.productAmount * item.Product.productPrice}원
+                                            </p>
+                                            <div className="amountSetting">
+                                                <strong>갯수선택</strong>
+                                                <div>
+                                                    <IconButton color="primary">
+                                                        <RemoveCircleOutlineIcon />
+                                                    </IconButton>
+                                                    <span>{item.Product.productAmount}</span>
+                                                    <IconButton color="primary">
+                                                        <ControlPointIcon />
+                                                    </IconButton>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="btnArea">
+                                            <Button variant="contained" size="large">
+                                                🗑️ 삭제하기
+                                            </Button>
+                                        </div>
+                                    </li>
+                                );
+                            })}
                         </ul>
                         <div className="totalArea">
                             <strong>전체상품 : 2개</strong>
