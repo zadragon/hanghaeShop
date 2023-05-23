@@ -27,26 +27,45 @@ const Layout = () => {
                 <div className="inner">
                     {cookies.token && (
                         <div className="userInfo">
-                            <strong>{user.userName}</strong>님 환영합니다.
+                            <strong>{user.userName}</strong>님 환영합니다. (
+                            {user.userType == 'buyer' ? '구매자' : '판매자'})
                         </div>
                     )}
                     <h1>
-                        <Link to="/">
-                            <LocalOfferIcon style={{ color: '#3498db', fontSize: '34px', verticalAlign: 'middle' }} />{' '}
-                            항해 쇼핑몰
-                        </Link>
+                        {userInfo.userType == 'seller' ? (
+                            <Link to="/seller/myGoods">
+                                <LocalOfferIcon
+                                    style={{ color: '#3498db', fontSize: '34px', verticalAlign: 'middle' }}
+                                />
+                                항해 쇼핑몰
+                            </Link>
+                        ) : (
+                            <Link to="/">
+                                <LocalOfferIcon
+                                    style={{ color: '#3498db', fontSize: '34px', verticalAlign: 'middle' }}
+                                />
+                                항해 쇼핑몰
+                            </Link>
+                        )}
                     </h1>
                     {/* 임시 gnb메뉴 */}
                     <div className="util">
                         <ul>
-                            {userInfo.userType == 'seller' && (
+                            {userInfo.userType == 'seller' ? (
+                                <>
+                                    <li>
+                                        <Link to="/seller/addGoods">상품등록</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/seller/myGoods">내가 등록한 상품</Link>
+                                    </li>
+                                </>
+                            ) : (
                                 <li>
-                                    <Link to="/seller/addGoods">상품등록</Link>
+                                    <Link to="/goods/cart">장바구니</Link>
                                 </li>
                             )}
-                            <li>
-                                <Link to="/goods/cart">장바구니</Link>
-                            </li>
+
                             <li>
                                 {cookies.token ? (
                                     <Button

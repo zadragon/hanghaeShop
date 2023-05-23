@@ -59,8 +59,7 @@ export const goods = {
                 }
             })
             .catch(error => {
-                console.log(error);
-                alert(error.response.data.errorMessage);
+                console.log(error.response.data.errorMessage);
             });
     },
     getBuyerGoodsDetail: (token, id, setState) => {
@@ -90,7 +89,22 @@ export const goods = {
             })
             .catch(error => {
                 console.log(error);
-                alert(error.reponse.date.errorMessage);
+                alert(error.response.data.errorMessage);
+            });
+    },
+    removeCartGoods: (token, id, cart, setCart) => {
+        axios
+            .delete(`${process.env.REACT_APP_HOST}/api/buyer/${id}`, { data: { token } })
+            .then(response => {
+                if (response.status === 200) {
+                    console.log(response);
+                    //alert(response.data.message);
+                }
+                let newData = cart.filter(item => item.cartsId !== id);
+                setCart([...newData]);
+            })
+            .catch(error => {
+                console.log(error);
             });
     },
     viewCart: (token, setCart) => {
@@ -119,7 +133,7 @@ export const goods = {
             })
             .catch(error => {
                 console.log(error);
-                alert(error.reponse.date.errorMessage);
+                alert(error.response.data.errorMessage);
                 // if (error.response.status === 401) {
                 //     alert('상품 등록 실패');
                 // }

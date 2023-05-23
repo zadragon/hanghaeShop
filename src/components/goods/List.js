@@ -5,10 +5,23 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { styled } from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { goods } from '../../api/api';
+import { useCookies } from 'react-cookie';
 
 export default function ActionAreaCard(goodsList) {
-    console.log(goodsList.goodsList);
+    const [cookie] = useCookies();
+    const navigate = useNavigate();
+
+    const addCartui = (productsId, productAmount, productPrice) => {
+        const payload = {
+            token: cookie.token,
+            productId: productsId,
+            productAmount: productAmount,
+            productPrice: productPrice,
+        };
+        goods.addCart(payload, navigate);
+    };
     return (
         <>
             <ProducList>
@@ -25,7 +38,7 @@ export default function ActionAreaCard(goodsList) {
                                     />
                                 </Link>
                                 <CardContent>
-                                    <Link to="/goods/detail/1">
+                                    <Link to={`/goods/detail/${item.productsId}`}>
                                         <Typography gutterBottom variant="h5" component="div">
                                             {item.productName}
                                         </Typography>
@@ -34,7 +47,13 @@ export default function ActionAreaCard(goodsList) {
                                             {/* {item.desc} */}
                                         </Typography>
                                     </Link>
-                                    <button>장바구니 담기</button>
+                                    <button
+                                        onClick={() =>
+                                            addCartui(item.productsId, item.productAmount, item.productPrice)
+                                        }
+                                    >
+                                        장바구니 담기
+                                    </button>
                                 </CardContent>
                             </CardActionArea>
                         </Card>

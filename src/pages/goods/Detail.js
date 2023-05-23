@@ -9,20 +9,13 @@ import { useCookies } from 'react-cookie';
 import { goods } from '../../api/api';
 import { useNavigate, useParams } from 'react-router-dom';
 const Detail = () => {
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
     const param = useParams();
     const [cookie] = useCookies();
     const [state, setState] = useState({ productName: '', productLink: '', productPrice: 0 });
-    let [amount, setAmount] = useState(1);
-    //let [total, setTotal] = useState(0);
-    const navigate = useNavigate();
-    console.log(param.id);
-    console.log(state);
-
     const { productName, productLink, productPrice } = state;
-
-    //const dispatch = useDispatch();
-    //const goodsList = useSelector(state => state.buyerInfo.allgoods);
+    let [amount, setAmount] = useState(1);
+    let [total, setTotal] = useState(productPrice);
 
     const ctlAmount = type => {
         if (type == 'add') {
@@ -30,6 +23,7 @@ const Detail = () => {
         } else if (type == 'minus') {
             amount <= 1 ? setAmount(1) : setAmount(--amount);
         }
+        setTotal(amount * productPrice);
     };
 
     const addCartui = () => {
@@ -37,7 +31,7 @@ const Detail = () => {
             token: cookie.token,
             productId: param.id,
             productAmount: amount,
-            productLink: productLink,
+            productPrice: productPrice,
         };
         goods.addCart(payload, navigate);
     };
@@ -45,6 +39,10 @@ const Detail = () => {
     useEffect(() => {
         goods.getBuyerGoodsDetail(cookie.token, param.id, setState);
     }, []);
+
+    useEffect(() => {
+        setTotal(amount * productPrice);
+    }, [state]);
 
     return (
         <>
@@ -73,7 +71,7 @@ const Detail = () => {
                             </div>
                         </div>
                         <div className="totalPrice">
-                            <strong>총 상품금액 : </strong> <span className="big">1,000,000</span>원
+                            <strong>총 상품금액 : </strong> <span className="big">{total}</span>원
                         </div>
                         <div className="buttonAction">
                             <Button variant="contained" size="large" onClick={addCartui}>

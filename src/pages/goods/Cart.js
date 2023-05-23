@@ -11,10 +11,25 @@ import { useCookies } from 'react-cookie';
 const Cart = () => {
     const [cookie] = useCookies();
     const [cart, setCart] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
     console.log(cart);
     useEffect(() => {
         goods.viewCart(cookie.token, setCart);
     }, []);
+
+    useEffect(() => {
+        setCart(cart);
+        let totalval = cart.reduce((acc, cur) => {
+            return (acc += cur.Product.productPrice * cur.productAmount);
+        }, 0);
+        console.log(totalval);
+        setTotalPrice(totalval);
+    }, [cart]);
+
+    const removeCartEvent = id => {
+        console.log(id);
+        goods.removeCartGoods(cookie.token, id, cart, setCart);
+    };
 
     return (
         <>
@@ -31,14 +46,14 @@ const Cart = () => {
                                             <img src={item.Product.productLink} alt="" />
                                         </div>
                                         <div className="txtArea">
-                                            <strong>{item.Product.productName}</strong>
-                                            <div className="desc">
-                                                📢 한정수량 진행! 옵션2번 주목! 28,000원 → 19,000원 32% OFF
-                                            </div>
+                                            <strong>
+                                                {item.Product.productName} : {item.Product.productPrice}원
+                                            </strong>
+                                            <div className="desc">📢 한정수량 진행! 옵션2번 주목! 32% OFF</div>
                                         </div>
                                         <div className="amountArea">
                                             <p className="totalPrice">
-                                                {item.Product.productAmount * item.Product.productPrice}원
+                                                총 금액 : {item.productAmount * item.Product.productPrice}원
                                             </p>
                                             <div className="amountSetting">
                                                 <strong>갯수선택</strong>
@@ -46,7 +61,7 @@ const Cart = () => {
                                                     <IconButton color="primary">
                                                         <RemoveCircleOutlineIcon />
                                                     </IconButton>
-                                                    <span>{item.Product.productAmount}</span>
+                                                    <span>{item.productAmount}</span>
                                                     <IconButton color="primary">
                                                         <ControlPointIcon />
                                                     </IconButton>
@@ -54,7 +69,11 @@ const Cart = () => {
                                             </div>
                                         </div>
                                         <div className="btnArea">
-                                            <Button variant="contained" size="large">
+                                            <Button
+                                                variant="contained"
+                                                size="large"
+                                                onClick={() => removeCartEvent(item.cartsId)}
+                                            >
                                                 🗑️ 삭제하기
                                             </Button>
                                         </div>
@@ -63,16 +82,16 @@ const Cart = () => {
                             })}
                         </ul>
                         <div className="totalArea">
-                            <strong>전체상품 : 2개</strong>
+                            <strong>전체상품 : {cart.length}개</strong>
                             <table>
                                 <tbody>
                                     <tr>
                                         <th scope="row">주문금액</th>
-                                        <td>1,000,000원</td>
+                                        <td>{totalPrice}원</td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <Button variant="contained" size="large">
+                            <Button variant="contained" size="large" onClick={() => alert('구매완료!')}>
                                 💳 주문하기
                             </Button>
                         </div>
