@@ -56,13 +56,13 @@ const Cart = () => {
                                                 총 금액 : {item.productAmount * item.Product.productPrice}원
                                             </p>
                                             <div className="amountSetting">
-                                                <strong>갯수선택</strong>
+                                                <strong>갯수</strong>
                                                 <div>
-                                                    <IconButton color="primary">
+                                                    <IconButton color="primary" style={{ display: 'none' }}>
                                                         <RemoveCircleOutlineIcon />
                                                     </IconButton>
                                                     <span>{item.productAmount}</span>
-                                                    <IconButton color="primary">
+                                                    <IconButton color="primary" style={{ display: 'none' }}>
                                                         <ControlPointIcon />
                                                     </IconButton>
                                                 </div>

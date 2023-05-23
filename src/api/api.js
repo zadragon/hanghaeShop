@@ -171,4 +171,18 @@ export const goods = {
                 // 항상 실행되는 영역
             });
     },
+    modifyMygoods: data => {
+        console.log(data);
+        axios
+            .put(`${process.env.REACT_APP_HOST}/api/seller/${data.id}`, { ...data.payload })
+            .then(response => {
+                if (response.status === 200) {
+                    console.log(response);
+                    alert(response.data.message);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
 };

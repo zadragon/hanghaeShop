@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from '../../styles/layout';
 import * as D from '../../styles/common';
 import { Button } from '@mui/material';
@@ -6,6 +6,7 @@ import MetaTag from '../../components/MetaTag';
 import { goods } from '../../api/api';
 import { useCookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
+import FormDialog from '../../components/goods/Dialog';
 
 const MyGoods = () => {
     const [cookies] = useCookies();
@@ -20,6 +21,24 @@ const MyGoods = () => {
 
     const removeGoods = id => {
         goods.removeGoods(cookies.token, id, dispatch);
+    };
+
+    const [open, setOpen] = useState(false);
+    const [modifyInfo, setModifyInfo] = useState({
+        payload: {
+            token: cookies.token,
+            newAmount: 0,
+            newPrice: 0,
+        },
+        id: 0,
+    });
+    const handleClickOpen = id => {
+        setOpen(true);
+        setModifyInfo({ ...modifyInfo, id: id });
+    };
+
+    const handleClose = () => {
+        setOpen(false);
     };
 
     return (
@@ -54,18 +73,19 @@ const MyGoods = () => {
                                         </div>
                                         <div className="txtArea">
                                             <strong>{item.productName}</strong>
-                                            <div className="desc">
-                                                📢 한정수량 진행! 옵션2번 주목! 28,000원 → 19,000원 32% OFF
-                                            </div>
+                                            <div className="desc">📢 한정수량 진행! 옵션2번 주목! 32% OFF</div>
                                         </div>
                                         <div className="amountArea">
-                                            <p className="totalPrice">{item.productPrice}</p>
+                                            <strong className="totalPrice">{item.productPrice} 원</strong>
                                             <div className="amountSetting">
                                                 <strong>재고량</strong>
                                                 <div>
                                                     <span>{item.productAmount}</span>
                                                 </div>
                                             </div>
+                                            <Button variant="outlined" onClick={() => handleClickOpen(item.productsId)}>
+                                                수정하기
+                                            </Button>
                                         </div>
                                         <div className="btnArea">
                                             <Button
@@ -83,6 +103,13 @@ const MyGoods = () => {
                     </D.CartList>
                 </D.CartArea>
             </S.Content>
+            <FormDialog
+                open={open}
+                handleClose={handleClose}
+                modifyInfoData={modifyInfo}
+                setModifyInfo={setModifyInfo}
+                setOpen={setOpen}
+            />
         </>
     );
 };
