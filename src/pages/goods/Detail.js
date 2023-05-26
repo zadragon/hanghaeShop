@@ -36,6 +36,14 @@ const Detail = () => {
         goods.addCart(payload, navigate);
     };
 
+    const buyOrder = () => {
+        const payload = {
+            token: cookie.token,
+            buyAmount: amount,
+        };
+        goods.buyGoods(payload, param.id, navigate);
+    };
+
     useEffect(() => {
         goods.getBuyerGoodsDetail(cookie.token, param.id, setState);
     }, []);
@@ -77,7 +85,7 @@ const Detail = () => {
                             <Button variant="contained" size="large" onClick={addCartui}>
                                 🧺 장바구니 담기
                             </Button>
-                            <Button variant="contained" size="large" onClick={() => alert('구매되었습니다.')}>
+                            <Button variant="contained" size="large" onClick={buyOrder}>
                                 💰 구매하기
                             </Button>
                         </div>

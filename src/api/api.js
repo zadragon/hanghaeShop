@@ -121,6 +121,20 @@ export const goods = {
                 console.log(error);
             });
     },
+    buyGoods: (payload, id, navigate) => {
+        axios
+            .post(`${process.env.REACT_APP_HOST}/api/buyer/confirm/${id}`, payload)
+            .then(response => {
+                if (response.status === 200) {
+                    console.log(response);
+                    alert(response.data.message);
+                    navigate('/');
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
     addGoods: (payload, navigate) => {
         console.log(payload);
         axios

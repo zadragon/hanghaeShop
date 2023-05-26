@@ -17,7 +17,7 @@ export default function ActionAreaCard(goodsList) {
         const payload = {
             token: cookie.token,
             productId: productsId,
-            productAmount: productAmount,
+            productAmount: 1,
             productPrice: productPrice,
         };
         goods.addCart(payload, navigate);
